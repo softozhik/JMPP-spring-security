@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Users</title>
+</head>
+<body>
+<div align="center">
+    <h2>Users Manager</h2>
+    <h3><a href="/new">New User</a></h3>
+    <table border="1" cellpadding="5">
+        <tr>
+            <th width="150">ID</th>
+            <th width="150">First Name</th>
+            <th width="150">Last Name</th>
+            <th width="150">E-mail</th>
+            <th width="100">Edit</th>
+            <th width="100">Delete</th>
+
+        </tr>
+        <th:block th:each="msg : ${users}">
+            <tr>
+                <td width="150" th:text="${msg.getId()}"></td>
+                <td width="150" th:text="${msg.getFirstName()}"></td>
+                <td width="150" th:text="${msg.getLastName()}"></td>
+                <td width="150" th:text="${msg.getEmail()}"></td>
+                <td><a th:href="@{/{id}/edit(id=${msg.getId()})}">Edit</a></td>
+                <td>
+                    <form th:method="DELETE" th:action="@{/{id}(id=${msg.getId()})}">
+                        <input type="submit" value="Delete"/>
+                    </form>
+                </td>
+            </tr>
+        </th:block>
+    </table>
+</div>
+</body>
+</html>
